@@ -1,0 +1,37 @@
+--Zadanie5
+--SELECT imie,nazwisko,nrpokoju FROM rezerwacja INNER JOIN gosc ON gosc.idgosc = rezerwacja.idgosc
+--WHERE /*YEAR(rezerwacja.datado) = '08' AND */(gosc.nazwisko LIKE 'K%' OR gosc.nazwisko LIKE 'L%')
+--Zadanie6
+--SELECT imie,nazwisko FROM gosc INNER JOIN rezerwacja ON rezerwacja.idgosc = gosc.idgosc
+--WHERE rezerwacja.zaplacona = 0
+--Zadanie7
+/*SELECT COUNT(*),imie,nazwisko FROM ((gosc INNER JOIN rezerwacja ON rezerwacja.idgosc = gosc.idgosc) INNER JOIN pokoj ON pokoj.nrpokoju = rezerwacja.nrpokoju)INNER JOIN kategoria ON kategoria.idkategoria = pokoj.idkategoria
+GROUP BY imie,nazwisko
+WHERE kategoria.nazwa = 'Luksusowy';
+HAVING COUNT(*) >=2
+*/
+--Zadanie8
+--SELECT rezerwacja.nrpokoju FROM( rezerwacja INNER JOIN gosc ON gosc.idgosc = rezerwacja.idgosc) INNER JOIN pokoj ON pokoj.nrpokoju = rezerwacja.nrpokoju
+--WHERE gosc.imie = 'Andrzej' AND gosc.nazwisko = 'Nowak'
+--Zadanie9
+--SELECT imie,nazwisko,COUNT(*) iloscRezerwacji FROM rezerwacja INNER JOIN gosc ON gosc.idgosc = rezerwacja.idgosc 
+--GROUP BY imie,nazwisko
+--HAVING COUNT(*) >= 3
+--Zadanie10
+--SELECT SUM(LICZBA_MIEJSC) FROM pokoj
+--Zadanie11
+--SELECT SUM(LICZBA_MIEJSC) FROM pokoj INNER JOIN kategoria ON kategoria.idkategoria = pokoj.idkategoria
+--WHERE kategoria.nazwa = 'Luksusowy'
+--Zadanie12
+--SELECT nazwa,COUNT(*) FROM kategoria INNER JOIN pokoj ON pokoj.idkategoria = kategoria.idkategoria
+--GROUP BY nazwa
+--Zadanie13
+--SELECT nrpokoju FROM pokoj
+--WHERE nrpokoju NOT IN (SELECT nrpokoju FROM rezerwacja)
+--Zadanie14
+--SELECT imie,nazwisko FROM gosc INNER JOIN rezerwacja ON rezerwacja.idgosc = gosc.idgosc
+--GROUP BY imie,nazwisko
+---HAVING COUNT(*) = 1
+--Zadanie15
+--SELECT imie,nazwisko FROM gosc INNER JOIN rezerwacja ON rezerwacja.idgosc = gosc.idgosc
+--WHERE rezerwacja.nrpokoju = 101 AND rezerwacja.zaplacona = 1

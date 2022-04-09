@@ -1,0 +1,52 @@
+--Zadanie1
+SELECT * FROM emp
+WHERE sal = (SELECT MIN(sal) FROM EMP);
+--Zadanie2
+SELECT * FROM emp
+WHERE job = (SELECT job FROM emp WHERE ename = 'BLAKE')
+--Zadanie3
+SELECT * FROM emp
+WHERE sal IN (SELECT MIN (sal) FROM emp GROUP BY deptno);
+--Zadanie4
+SELECT * FROM emp a
+WHERE sal IN (SELECT MIN (sal) FROM emp b WHERE a.deptno = b.deptno);
+--Zadanie5
+SELECT * FROM emp 
+WHERE sal > ANY (SELECT sal FROM emp WHERE emp.deptno = 30);
+--Zadanie6
+SELECT * FROM emp 
+WHERE sal > ALL (SELECT sal FROM emp WHERE emp.deptno = 30);
+--Zadanie7
+SELECT deptno FROM emp 
+GROUP BY deptno
+HAVING AVG(sal) > ALL (SELECT AVG(sal) FROM emp WHERE emp.deptno = 30);
+--Zadanie8
+SELECT job FROM emp 
+GROUP BY job
+HAVING AVG(sal) >= ALL(SELECT AVG(SAL) FROM emp GROUP BY job)
+--Zadanie9
+SELECT * FROM emp 
+WHERE sal > ALL(SELECT SAL FROM emp INNER JOIN dept ON dept.deptno=emp.deptno WHERE dname = 'SALES');
+--Zadanie10
+SELECT * FROM emp a
+WHERE sal > (SELECT AVG(sal) FROM emp b WHERE a.deptno = b.deptno GROUP BY deptno);
+--Zadanie11
+SELECT * FROM emp a
+WHERE sal > (SELECT AVG(sal) FROM emp b WHERE a.deptno = b.deptno GROUP BY deptno);
+--Zadanie12
+SELECT * FROM emp
+WHERE deptno NOT IN(SELECT deptno FROM dept)
+--Zadanie13
+SELECT * FROM emp a
+WHERE hiredate =  (SELECT MAX(hiredate) FROM emp b WHERE a.deptno = b.deptno)
+ORDER BY hiredate;
+--Zadanie14
+SELECT ename, sal , deptno FROM emp
+WHERE sal > ALL (SELECT AVG(sal) FROM emp);
+--Zadanie15
+SELECT deptno FROM dept
+WHERE dept.deptno NOT IN(SELECT emp.deptno FROM emp)
+--Zadanie16
+SELECT deptno, w_dziale / razem * 100
+FROM (SELECT COUNT(*) AS razem FROM emp) a,
+(SELECT deptno, COUNT(*) AS w_dziale FROM emp GROUP BY deptno) b

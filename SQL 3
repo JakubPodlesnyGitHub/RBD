@@ -1,0 +1,68 @@
+--Zadanie1
+SELECT ROUND(AVG(sal),2) FROM emp
+--Zadanie2
+SELECT MIN(sal) FROM emp
+WHERE job = 'CLERK';
+--Zadanie3
+SELECT COUNT(deptno) as "Liczba Pracownikow  w dep 20" FROM emp
+WHERE deptno = 20;
+--Zadanie4
+SELECT ROUND(AVG(sal),2),job FROM emp
+GROUP BY job;
+--Zadanie5
+SELECT ROUND(AVG(sal),2),job FROM emp
+GROUP BY job HAVING (job != 'MANAGER');
+--Zadanie6
+SELECT ROUND(AVG(sal),2),job FROM emp,dept
+GROUP BY (job,dname)
+--Zadanie7
+SELECT MAX(sal)FROM emp
+GROUP BY deptno;
+--Zadanie8
+SELECT ROUND(AVG(sal),2) FROM emp
+GROUP BY deptno
+HAVING COUNT(*) > 3;
+--Zadanie9
+SELECT job,ROUND(AVG(sal),2) FROM emp
+GROUP BY emp.job HAVING AVG(sal) >3000;
+--Zadanie10
+SELECT AVG((sal*12)+NVL(0,comm)) as "Roczne" ,AVG(sal+NVL(0,comm)) as "Miesieczne",job FROM emp
+GROUP BY job;
+--Zadanie11
+SELECT MAX(sal)-MIN(sal) FROM emp;
+--Zadanie12
+SELECT dname FROM dept 
+INNER JOIN emp ON emp.deptno = dept.deptno
+GROUP BY dept.dname HAVING COUNT(ename) >3;
+--Zadanie13
+SELECT COUNT(*) as "Czy Unikalne" FROM emp
+GROUP BY empno;
+--Zadanie14
+SELECT sal FROM emp
+INNER JOIN SALGRADE ON sal BETWEEN losal AND hisal
+GROUP BY emp.sal HAVING sal >1000;
+--Zadanie15
+SELECT COUNT(*) FROM dept 
+INNER JOIN emp ON emp.deptno = dept.deptno
+WHERE dept.loc = 'DALLAS';
+--Zadanie16
+SELECT MAX(sal) FROM emp
+INNER JOIN SALGRADE ON sal BETWEEN losal AND hisal
+GROUP BY grade;
+--Zadanie17
+SELECT sal, COUNT(*)
+FROM emp
+GROUP BY sal
+HAVING COUNT(*) > 1;
+--Zadanie18
+SELECT ROUND(AVG(sal),2) FROM emp
+INNER JOIN SALGRADE ON sal BETWEEN losal AND hisal
+WHERE grade = 2;
+--Zadanie19
+SELECT mgr, COUNT(*)
+FROM emp
+GROUP BY mgr;
+--Zadanie20
+SELECT SUM(sal) FROM emp
+INNER JOIN SALGRADE ON sal BETWEEN losal AND hisal
+WHERE grade = 1;

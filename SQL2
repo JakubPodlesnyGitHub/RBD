@@ -1,0 +1,61 @@
+--Zadanie1
+SELECT* FROM emp,dept
+WHERE emp.deptno = dept.deptno
+--Zadanie2
+SELECT* FROM emp,dept
+INNER JOIN dept ON emp.deptno = dept.deptno;
+--Zadanie3
+SELECT  ename, dname FROM emp
+INNER JOIN dept ON emp.deptno = dept.deptno 
+ORDER BY ename;
+--Zadanie4
+SELECT  ename,dname,emp.deptno FROM emp
+INNER JOIN dept ON emp.deptno = dept.deptno ;
+--Zadanie5
+SELECT  ename,dname,loc FROM emp
+INNER JOIN dept ON emp.deptno = dept.deptno 
+WHERE sal >1500;
+--Zadanie6
+SELECT  ename,job,sal,grade FROM emp
+INNER JOIN salgrade ON sal BETWEEN losal AND hisal;
+--Zadanie7
+SELECT  ename,job,sal FROM emp
+INNER JOIN salgrade ON sal BETWEEN losal AND hisal
+WHERE salgrade.grade = 3;
+--Zadanie8
+SELECT  ename FROM emp
+INNER JOIN dept ON emp.deptno = dept.deptno
+WHERE loc = 'DALLAS' ;
+--Zadanie9
+SELECT ename,dname FROM
+emp INNER JOIN dept ON dept.deptno = emp.deptno INNER JOIN salgrade ON sal BETWEEN losal and hisal;
+--Zadanie10
+SELECT * FROM dept
+LEFT OUTER JOIN emp ON emp.deptno = dept.deptno;
+--Zadanie11
+SELECT * FROM dept
+RIGHT OUTER JOIN emp ON emp.deptno = dept.deptno;
+--Zadanie12
+SELECT ename, deptno FROM emp WHERE deptno = 30
+UNION ALL 
+SELECT 'brak' ,deptno FROM emp WHERE deptno = 20;
+--Zadanie13
+SELECT DISTINCT job FROM emp WHERE deptno = 30
+UNION 
+SELECT DISTINCT job FROM emp WHERE deptno = 10;
+--Zadanie14
+SELECT job FROM emp WHERE deptno = 30
+INTERSECT
+SELECT job FROM emp WHERE deptno = 10;
+--Zadanie15
+SELECT job FROM emp WHERE deptno = 30
+MINUS
+SELECT job FROM emp WHERE deptno = 10;
+--Zadanie16
+SELECT *
+FROM emp prac INNER JOIN emp mgr ON prac.mgr = mgr.empno
+WHERE prac.sal<mgr.sal;
+--Zadanie17
+SELECT prac.ename, mgr.ename FROM emp prac 
+INNER JOIN emp mgr ON prac.mgr = mgr.empno
+ORDER BY mgr.ename;

@@ -1,0 +1,108 @@
+--Zadanie1
+SELECT deptno,ename,empno FROM emp;
+--Zadanie2
+SELECT * FROM emp;
+--Zadanie3
+SELECT sal*12 FROM emp;
+--Zadanie4
+SELECT (sal+250)*12 FROM emp;
+--Zadanie5
+SELECT sal*12 AS "roczna" FROM emp;
+--Zadanie6
+SELECT sal*12 AS "r pensja" FROM emp;
+--Zadanie7
+SELECT empno || ' ' || ename FROM emp;
+--Zadanie8
+SELECT ename | ' pracuje w dziale ' | deptnoFROM emp;
+--Zadanie9
+SELECT (sal*12)+comm FROM emp;
+--Zadanie10
+SELECT deptno FROM emp;
+--Zadanie11
+SELECT DISTINCT deptno FROM emp;
+--Zadanie12
+SELECT DISTINCT deptno,job FROM emp;
+--Zadanie13
+SELECT * FROM emp
+ORDER BY ename;
+--Zadanie14
+SELECT * FROM emp
+ORDER BY hirdate DESC;
+--Zadanie15
+SELECT ename,empno,deptno FROM emp
+ORDER BY deptno ASC,sal DESC;
+--Zadanie16
+SELECT ename,empno,job,deptno
+FROM emp
+WHERE job = 'CLERK';
+--Zadanie17
+SELECT dname,deptno FROM dept
+WHERE deptno > 20;
+--Zadanie18
+SELECT empno, ename FROM emp
+WHERE comm > sal;
+--Zadanie19
+SELECT * FROM emp
+WHERE sal BETWEEN 1000 AND 2000;
+--Zadanie20
+SELECT * FROM emp
+WHERE mgr IN (7902, 7566, 7788);
+--Zadanie21
+SELECT ename FROM emp
+WHERE ename LIKE 'S%';
+--Zadanie22?
+SELECT LENGTH(ename),ename FROM emp
+where LENGTH(ename)<=4;
+--Zadanie23?
+SELECT empno,ename,sal FROM emp
+WHERE job = 'PRESIDENT'
+--Zadanie24
+SELECT sal
+FROM emp
+WHERE sal NOT BETWEEN 1000 AND 2000;
+--Zadanie25
+SELECT ename FROM emp
+WHERE ename NOT LIKE 'M%';
+--Zadanie26
+SELECT ename FROM emp
+WHERE MGR IS NOT NULL;
+--Zadanie27
+SELECT ename,deptno
+FROM emp
+WHERE (sal BETWEEN 1000 AND 2000) AND (job = 'CLERK');
+--Zadanie28
+SELECT ename,deptno
+FROM emp
+WHERE (sal BETWEEN 1000 AND 2000) AND (job = 'CLERK');
+--Zadanie29
+SELECT ename,deptno FROM emp
+WHERE ((sal > 1500) AND (job = 'MANAGER')) OR (job = 'SALESMAN');
+--Zadanie30
+SELECT ename,deptno FROM emp
+WHERE (sal > 1500) AND (job = 'MANAGER' OR job = 'SALESMAN');
+--Zadanie31
+SELECT ename FROM emp
+WHERE (job = 'MANAGER') OR (job = 'CLERK' AND deptno = 10);
+--Zadanie32
+SELECT* FROM SALGRADE;
+--Zadanie33
+SELECT* FROM DEPT;
+--Zadanie34
+SELECT deptno,dname FROM dept
+ORDER BY deptno;
+--Zadanie35
+SELECT DISTINCT job FROM emp;
+--Zadanie36
+SELECT ename FROM emp
+WHERE deptno=10 OR deptno=20
+ORDER BY ename;
+--Zadanie37
+SELECT ename FROM emp
+WHERE (ename LIKE '%TH%') OR (ename LIKE '%LL%');
+--Zadanie38
+SELECT ename,deptno,hiredate FROM emp
+WHERE hiredate LIKE '80%'
+--Zadanie39
+SELECT ename,(12*sal),comm FROM emp
+WHERE (sal > comm)
+ORDER BY sal DESC,ename;

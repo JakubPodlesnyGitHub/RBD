@@ -1,0 +1,63 @@
+--Zadanie1
+SELECT imie,nazwisko FROM GOSC
+ORDER BY imie,nazwisko;
+--Zadanie2
+SELECT DISTINCT procent_rabatu FROM GOSC
+ORDER BY procent_rabatu DESC;
+--Zadanie3
+SELECT idrezerwacja FROM rezerwacja
+INNER JOIN gosc ON gosc.idgosc = rezerwacja.idgosc
+WHERE gosc.imie = 'Ferdynand';
+--Zadanie4
+SELECT imie,nazwisko FROM rezerwacja
+INNER JOIN gosc ON gosc.idgosc = rezerwacja.idgosc
+WHERE procent_rabatu IS null;
+--Zadanie5
+SELECT imie, nazwisko, nrPokoju FROM rezerwacja
+INNER JOIN gosc ON gosc.idgosc = rezerwacja.idgosc
+WHERE EXTRACT (YEAR FROM dataOd) = 2008 AND (nazwisko LIKE 'K%' OR nazwisko LIKE 'L%');
+--Zadanie6
+SELECT imie, nazwisko, nrPokoju FROM rezerwacja
+INNER JOIN gosc ON gosc.idgosc = rezerwacja.idgosc
+WHERE zaplacona = 0;
+--Zadanie7
+SELECT imie, nazwisko FROM 
+((rezerwacja INNER JOIN gosc ON gosc.idgosc = rezerwacja.idgosc) 
+INNER JOIN pokoj ON pokoj.nrpokoju = rezerwacja.nrpokoju)
+INNER JOIN kategoria ON kategoria.idkategoria = pokoj.idkategoria
+WHERE kategoria.nazwa = 'Luksusowy';
+--Zadanie8
+SELECT nrpokoju FROM rezerwacja
+INNER JOIN gosc ON gosc.idgosc = rezerwacja.idgosc
+WHERE imie = 'Andrzej';
+--Zadanie9
+SELECT imie, nazwisko, COUNT(*) FROM gosc 
+INNER JOIN rezerwacja ON rezerwacja.idgosc=gosc.idgosc 
+GROUP BY imie, nazwisko 
+HAVING COUNT(*) >= 3;
+--Zadanie10
+SELECT SUM(liczba_miejsc) as "liczba miejsc" FROM pokoj;
+--Zadanie11
+SELECT SUM(liczba_miejsc) FROM pokoj 
+INNER JOIN kategoria ON kategoria.idkategoria=pokoj.idkategoria 
+WHERE kategoria.nazwa='Luksusowy';
+--Zadanie12
+SELECT kategoria.idkategoria,SUM(liczba_miejsc) FROM pokoj 
+INNER JOIN kategoria ON kategoria.idkategoria=pokoj.idkategoria 
+GROUP BY kategoria.idkategoria;
+--Zadanie13
+SELECT nrpokoju FROM rezerwacja
+WHERE nrpokoju NOT IN(SELECT nrpokoju FROM pokoj);
+--Zadanie14
+SELECT imie,nazwisko FROM gosc
+WHERE idgosc NOT IN(SELECT COUNT(*) FROM rezerwacja HAVING COUNT(*) =1 );
+--Zadanie15
+SELECT imie,nazwisko FROM gosc
+INNER JOIN rezerwacja ON rezerwacja.idgosc=gosc.idgosc
+WHERE zaplacona=1 AND nrpokoju=101;
+--Zadanie16
+SELECT kategoria.cena *(DAY(dataDO)-DAY(dataOd)) FROM 
+((rezerwacja INNER JOIN gosc ON gosc.idgosc = rezerwacja.idgosc) 
+INNER JOIN pokoj ON pokoj.nrpokoju = rezerwacja.nrpokoju)
+INNER JOIN kategoria ON kategoria.idkategoria = pokoj.idkategoria
+WHERE imie = 'Marian' AND nazwisko = 'Paździoch'
